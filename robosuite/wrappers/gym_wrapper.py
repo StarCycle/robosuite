@@ -97,7 +97,7 @@ class GymWrapper(Wrapper, gym.Env):
             else:
                 raise TypeError("Seed must be an integer type!")
         ob_dict = self.env.reset()
-        return self._flatten_obs(ob_dict), {}
+        return ob_dict, {}
 
     def step(self, action):
         """
@@ -116,7 +116,7 @@ class GymWrapper(Wrapper, gym.Env):
                 - (dict) misc information
         """
         ob_dict, reward, terminated, info = self.env.step(action)
-        return self._flatten_obs(ob_dict), reward, terminated, False, info
+        return ob_dict, reward, terminated, False, info
 
     def compute_reward(self, achieved_goal, desired_goal, info):
         """
